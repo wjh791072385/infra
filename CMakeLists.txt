@@ -1,6 +1,8 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.9)
 
 PROJECT(infra)
+
+
 
 set(BASE_FLAGS            "-g -Wall -Werror")
 set(SP_C_FLAGS            "-std=gnu99")
@@ -37,6 +39,12 @@ message(STATUS ">>> CXX_FLAGS : " ${CMAKE_CXX_FLAGS})
 #*******************************************************************************
 
 set(EXECUTABLE_OUTPUT_PATH    ${PROJECT_BINARY_DIR}/bin)
+
+#*******************************************************************************
+#*******************************************************************************
+
+set(GTEST_PATH /usr/local/include)
+set(GTEST_LIB /usr/local/lib)
 
 #*******************************************************************************
 #*******************************************************************************
