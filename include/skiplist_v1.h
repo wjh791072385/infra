@@ -1,3 +1,4 @@
+#include <iostream>
 #include <ctime>
 #include <cstring>
 #include <random>
@@ -152,8 +153,8 @@ int skiplist<K, V>::insert_element(K k, V v)
     //level 0包含了全部元素，如果该元素存在，那么下一个元素就是k，进行更新
     cur = cur->forward[0];
     if (cur != nullptr && cur->key == k) {
-        //todo log
-        std::cout << "key : " << k << " exists" << std::endl;
+        //todo record log
+        // std::cout << "key : " << k << " exists" << std::endl;
         cur->value = v;
         return 1;
     }
@@ -195,10 +196,10 @@ skiplist_node<K, V>* skiplist<K, V>::search_element(K k)
 
     cur = cur->forward[0];
     if (cur != nullptr && cur->key == k) {
-        std::cout << "key : " << k << " exists" << std::endl;
+        // std::cout << "key : " << k << " exists" << std::endl;
         return cur;
     }
-    std::cout << "key : " << k << " not exists" << std::endl;
+    // std::cout << "key : " << k << " not exists" << std::endl;
     return nullptr;
 }
 
@@ -223,7 +224,7 @@ int skiplist<K, V>::delete_element(K k)
     // level 0包含了全部元素，如果该元素存在，那么下一个元素就是k，进行更新
     cur = cur->forward[0];
     if (cur == nullptr || cur->key != k) {
-        std::cout << "key : " << k << " not exists" << std::endl;
+        // std::cout << "key : " << k << " not exists" << std::endl;
         return 1;
     }
 
@@ -240,7 +241,7 @@ int skiplist<K, V>::delete_element(K k)
         --current_level;
     }
 
-    std::cout << "successfully delete key : " << k << std::endl;
+    // std::cout << "successfully delete key : " << k << std::endl;
     --element_count;
     return 0;
 }

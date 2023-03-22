@@ -24,7 +24,6 @@ TEST(TestSkiplist, test_all)
     EXPECT_TRUE(node == nullptr);
 
     ret = sp.delete_element(3);
-    sp.display_list();
 
     node = sp.search_element(3);
     EXPECT_TRUE(node == nullptr);

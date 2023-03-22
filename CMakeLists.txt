@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 2.9)
 
 PROJECT(infra)
 
-
-
 set(BASE_FLAGS            "-g -Wall -Werror")
 set(SP_C_FLAGS            "-std=gnu99")
 set(SP_C++_FLAGS          "-std=c++11")
@@ -32,7 +30,9 @@ endif()
 
 message(STATUS ">>> Source Dir: " ${PROJECT_SOURCE_DIR})
 message(STATUS ">>> Binary Dir: " ${PROJECT_BINARY_DIR})
+message(STATUS ">>> C_COMPILER: " ${CMAKE_C_COMPILER})
 message(STATUS ">>> C_FLAGS   : " ${CMAKE_C_FLAGS})
+message(STATUS ">>> CXX_COMPILER: " ${CMAKE_CXX_COMPILER})
 message(STATUS ">>> CXX_FLAGS : " ${CMAKE_CXX_FLAGS})
 
 #*******************************************************************************
