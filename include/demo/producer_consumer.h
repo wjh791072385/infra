@@ -21,7 +21,6 @@ class procon {
     unsigned int max_size;
 };
 
-
 template<typename T>
 void procon<T>::produce(const T &t) {
     std::unique_lock<std::mutex> lock(mtx);
@@ -31,8 +30,6 @@ void procon<T>::produce(const T &t) {
     buffer.push(t);
     is_empty.notify_one();
 }
-
-
 
 template<typename T>
 void procon<T>::consumer(T &t) {

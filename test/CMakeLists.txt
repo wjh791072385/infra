@@ -8,7 +8,7 @@ link_directories(${GTEST_LIB})
 add_subdirectory(demo)
 
 add_executable(ut ${TEST_SRC})
-target_link_libraries(ut pthread gtest)
+target_link_libraries(ut pthread gtest srclib)
 
 if(APPLE) 
     target_link_libraries(ut    "-Wl,-force_load" 
@@ -18,5 +18,5 @@ elseif(UNIX)
                                 demolib
                                 "-Wl,--no-whole-archive")
 else()
-    target_link_libraries(ut    "/WHOLEARCHIVE:demolib")
+    target_link_libraries(ut    "/WHOLEARCHIVE:" demolib)
 endif()               
