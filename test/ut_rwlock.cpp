@@ -77,7 +77,7 @@ void bench_test_read(locktype type, vector<int> &vec) {
     }
 }
 
-TEST(Testrwlock, test_all)
+TEST(Testrwlock, performance)
 {			
     thread *tds[THREAD_NUM];
 

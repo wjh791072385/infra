@@ -138,7 +138,9 @@ template <typename K, typename V>
 int skiplist<K, V>::insert_element(K k, V v)
 {
     skiplist_node<K, V> *cur = this->header;
-    skiplist_node<K, V> *update[max_level + 1];
+
+    // 这里大小为max_level+1   0层 + 索引层max_level
+    skiplist_node<K, V> *update[max_level + 1];  
     memset(update, 0, sizeof(skiplist_node<K, V> *) * (max_level + 1));
 
     //从上往下寻找
@@ -236,7 +238,7 @@ int skiplist<K, V>::delete_element(K k)
     //删除元素
     delete cur;
 
-    // 尝试缩小current_level
+    // 尝试缩小current_level, 删除没有forward指向的最高层
     while (current_level > 0 && header->forward[current_level] == 0) {
         --current_level;
     }
