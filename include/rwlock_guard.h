@@ -1,3 +1,6 @@
+#ifndef __RWLOCK_GUARD_H__
+#define __RWLOCK_GUARD_H__
+
 template <typename _RWlock>
 class rwlock_readguard{
   public:
@@ -35,3 +38,5 @@ class rwlock_writeguard{
   private:
     _RWlock &_rw_lock;
 };
+
+#endif

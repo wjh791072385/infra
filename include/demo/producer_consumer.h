@@ -1,3 +1,6 @@
+#ifndef __PRODUCER_CONSUMER_H__
+#define __PRODUCER_CONSUMER_H__
+
 #include <iostream>
 #include <mutex>
 #include <condition_variable>
@@ -42,3 +45,5 @@ void procon<T>::consumer(T &t) {
 
     is_full.notify_one();
 }
+
+#endif

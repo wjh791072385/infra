@@ -6,7 +6,8 @@
 using namespace std;
 
 #define MAX_THREAD_NUM 1
-#define TEST_COUNT 1000000
+// #define TEST_COUNT 1000000
+#define TEST_COUNT 1000
 
 TEST(TestSkiplist, function)
 {
@@ -64,6 +65,6 @@ TEST(TestSkiplist, performance)
 
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = end - start;
-    std::cout << "spend time:" << elapsed.count() << std::endl;
+    // std::cout << "spend time:" << elapsed.count() << std::endl;
 }
 

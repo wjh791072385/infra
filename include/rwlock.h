@@ -1,3 +1,6 @@
+#ifndef __RWLOCK_H__
+#define __RWLOCK_H__
+
 #include <mutex>
 #include <condition_variable>
 
@@ -57,3 +60,5 @@ class rwlock_rfirst{
     int32_t m_rcount;
     int32_t m_wcount;
 };
+
+#endif

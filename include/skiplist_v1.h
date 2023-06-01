@@ -1,3 +1,6 @@
+#ifndef __SKIPLIST_V1_H__
+#define __SKIPLIST_V1_H__
+
 #include <iostream>
 #include <ctime>
 #include <cstring>
@@ -268,4 +271,4 @@ int skiplist<K, V>::size()
     return this->element_count;
 }
 
-
+#endif

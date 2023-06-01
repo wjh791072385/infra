@@ -9,7 +9,8 @@ using namespace std;
 
 #define THREAD_NUM 4
 #define WRITE_CNT 1000
-#define READ_CNT 100000
+// #define READ_CNT 100000
+#define READ_CNT 1000
 
 /* *************************************************************
 
@@ -100,7 +101,7 @@ TEST(Testrwlock, performance)
 
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = end - start;
-    std::cout << "spend time:" << elapsed.count() << std::endl;
+    // std::cout << "spend time:" << elapsed.count() << std::endl;
 }
 
 

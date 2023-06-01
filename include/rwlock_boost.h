@@ -1,3 +1,6 @@
+#ifndef __RWLOCK_BOOST_H__
+#define __RWLOCK_BOOST_H__
+
 #include <mutex>
 #include <condition_variable>
 
@@ -151,3 +154,5 @@ class shared_mutex
           gate2_.notify_one();
       }
     }
+
+#endif
