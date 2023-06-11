@@ -8,8 +8,8 @@ using namespace std;
 
 // 实际后台执行的任务
 void job(int parm, void *cb_data, void (*cb_func) (int, void *)) {
-    cout << "sleep " << parm << "s...." << endl;
-    sleep(parm);
+    // cout << "sleep " << parm << "s...." << endl;
+    usleep(parm);
     cb_func(parm, cb_data);
 }
 
@@ -26,7 +26,7 @@ TEST(TestSemctx_v0, test_semctx)
     semctx_down(&ctx);
     semctx_fini(&ctx); // 只是销毁了信号量
 
-    cout << "ret = " << ctx.ret << endl;
+    // cout << "ret = " << ctx.ret << endl;
 
 }
 
@@ -40,8 +40,8 @@ TEST(TestSemctx_v0, test_async_ctx)
         job_nonblock(i, &ctx, async_ctx_up);
     }
 
-    cout << "block..." << endl;
+    // cout << "block..." << endl;
     async_ctx_down(&ctx);
     async_ctx_fini(&ctx);
-    cout << "ret = " << ctx.ret << endl;
+    // cout << "ret = " << ctx.ret << endl;
 }

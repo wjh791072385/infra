@@ -138,6 +138,17 @@ static inline void list_move_first(list_head_t *entry, list_head_t *head)
     list_add(entry, head);
 }
 
+// 获取第一个节点
+static inline void list_get_first(list_head_t **entry, list_head_t *head)
+{
+    if (__list_empty(head))
+    {
+        return;
+    }
+    *entry = head->next;
+    list_del(head->next);
+}
+
 /*******************************************************************************
 *******************************************************************************/
 
