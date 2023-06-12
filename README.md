@@ -3,12 +3,12 @@ c/c++infrastructure
 
 done:
 
-- [ ] async job queue
-
+- [x] 异步任务处理队列
+- [x] thread_res常驻线程
 - [x] skiplist    
-- [ ] threadpool
-- [ ] semephore + semctx
-- [ ] rwlock
+- [x] threadpool
+- [x] semephore + semctx
+- [x] rwlock
 
 
 
@@ -17,6 +17,7 @@ todo:
 - [ ] skiplist + comparator + iterator 
 - [ ] STL
 - [ ] heap
+- [ ] timer
 
 
 
