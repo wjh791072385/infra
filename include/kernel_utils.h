@@ -7,6 +7,8 @@
 #ifndef __KERNEL_UTILS__
 #define __KERNEL_UTILS___
 
+#include <stddef.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
