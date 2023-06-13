@@ -45,6 +45,4 @@ TEST(TestThread_res_v0, test_res) {
     EXPECT_TRUE(sleep_flag);
 
     thread_res_destory(g_thread_res);
-
-    cout << "常驻线程测试ok" << endl;
 }

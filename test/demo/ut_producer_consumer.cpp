@@ -17,7 +17,7 @@ void con2(procon<int> &pc) {
         int c;
         pc.consumer(c);
         // cout << "consumer1 " << c << endl;
-        usleep(1e5);  //每隔0.1s消费一个
+        usleep(1000);  //每隔1ms消费一个
     }
 }
 
@@ -26,7 +26,7 @@ void con1(procon<int> &pc) {
         int c;
         pc.consumer(c);
         // cout << "consumer2 " << c << endl;
-        usleep(1e5);  //每隔0.1s消费一个
+        usleep(1000);  //每隔0.1s消费一个
     }
 }
 

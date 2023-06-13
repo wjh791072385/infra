@@ -23,21 +23,22 @@ typedef struct {
 }node;
 
 TEST(TestList, test_list) {
-    list_head_t *head;
-    list_init(head);
+    // 一般head定义为栈变量
+    list_head_t head;
+    list_init(&head);
 
     node *ns[5];
     for (uint32_t i = 0; i < 5; i++) {
         ns[i] = (node *)malloc(sizeof(node));
         ns[i]->count = i + 100;
         ns[i]->score = i + 1000;
-        list_add_tail(&ns[i]->list, head);
+        list_add_tail(&ns[i]->list, &head);
     }
 
 
     list_head_t *cur, *next;
     int i = 0;
-    list_foreach_safe(cur, next, head) {
+    list_foreach_safe(cur, next, &head) {
         // 直接访问cur即可
         node *t = (node *)container_of(cur, node, list);
         EXPECT_EQ(i + 100, t->count);
@@ -49,7 +50,7 @@ TEST(TestList, test_list) {
 
 
     // 删除节点
-    list_foreach_safe(cur, next, head) {
+    list_foreach_safe(cur, next, &head) {
         list_del(cur);
 
         // 此时cur是独立的节点
@@ -59,7 +60,7 @@ TEST(TestList, test_list) {
 
     // 再次遍历判断size
     i = 0;
-    list_foreach_safe(cur, next, head) {
+    list_foreach_safe(cur, next, &head) {
         // 直接访问cur即可
         i++;
     }

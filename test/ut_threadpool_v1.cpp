@@ -4,13 +4,16 @@
 
 using namespace std;
 
+const int N = 10;
+bool st[N];
+
 class request{
   public:
     request(int i) : i(i) {}
 
     int process() {
-        // sleep(1);
-        // printf("request handle %d\n", i);
+        st[i] = true;
+        // printf("i = %d\n", i);
         return 0;
     }
 
@@ -25,7 +28,14 @@ TEST(TestThreadpool_v1, function)
         pool->append(new request(i));
     }
     
-    while (!pool->is_completed()) {
+    while ( pool->is_busy() || pool->m_task_queue.size() > 0) {
         usleep(1000);
+        // cout << "pool is not completed" << endl;
     }
+
+    for (int i = 0; i < 10; i++) {
+        EXPECT_TRUE(st[i] == true);
+    }
+
+    delete pool;
 }

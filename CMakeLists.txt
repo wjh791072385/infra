@@ -4,7 +4,7 @@ PROJECT(infra)
 
 set(BASE_FLAGS            "-g -Wall -Werror")
 set(SP_C_FLAGS            "-std=gnu99")
-set(SP_C++_FLAGS          "-std=c++11")
+set(SP_C++_FLAGS          "-std=c++14")
 set(SP_RELEASE_FLAGS      "-O2")
 set(SP_DEBUG_FLAGS        "-O0")
 

@@ -13,7 +13,7 @@ class threadpool{
     threadpool(int max_thread_num, int max_request_num);
     ~threadpool();
     int append(T *t);
-    bool is_completed();
+    bool is_busy();
 
   private:
     static void* worker(void *args); // pthread_create要求传入函数返回void *
@@ -22,28 +22,28 @@ class threadpool{
   public:
     std::atomic_bool is_running;
     int max_thread_num;
-    std::atomic_uint32_t busy_thread_num; //记录正在忙的数量，用于保证每个线程都执行完
+    std::atomic_uint32_t busy_task_num; //记录
     int max_request_num;
     pthread_t *tds;
 
     pthread_mutex_t m_mtx;
     std::deque<T *> m_task_queue; // 任务队列
-    sem_t *m_sem; 
+    sem_t m_sem; 
 };
 
 template<typename T>
 threadpool<T>::threadpool(int max_thread_num, int max_request_num) 
-    : max_thread_num(max_thread_num), max_request_num(max_request_num), is_running(true) {
+    : max_thread_num(max_thread_num), max_request_num(max_request_num), is_running(true), busy_task_num(0) {
     int ret = 0;
     do {
-        // ret = sem_init(&m_sem, 0);
-        //  if ( 0 != ret ) {
-        //     break;
-        // }
+        ret = sem_init(&m_sem, 0, 0);
+        if ( 0 != ret ) {
+            break;
+        }
     
         // Mac OS X不支持创建无名的信号量，只能使用sem_open创建有名的信号量
         // 注意传入信号量名字不能带路径
-        m_sem = sem_open("mysem", 0);
+        // m_sem = sem_open("mysem", 0);
        
         ret = pthread_mutex_init(&m_mtx, NULL);
         if (0 != ret) {
@@ -82,8 +82,8 @@ threadpool<T>::threadpool(int max_thread_num, int max_request_num)
 template<typename T>
 threadpool<T>::~threadpool() {
     is_running = false;
-    // sem_destroy(&m_sem);
-    sem_unlink("mysem");
+    sem_destroy(&m_sem);
+    // sem_unlink("mysem"); // mac使用
     pthread_mutex_destroy(&m_mtx);
     delete []tds;
 }
@@ -98,10 +98,11 @@ int threadpool<T>::append(T *t) {
         return -1;
     }
     m_task_queue.push_back(t);
+    busy_task_num++;
     pthread_mutex_unlock(&m_mtx);
     
     // 唤醒工作线程
-    sem_post(m_sem);
+    sem_post(&m_sem);
     return 0;
 }
 
@@ -115,7 +116,7 @@ void* threadpool<T>::worker(void *args) {
 template<typename T> 
 void threadpool<T>::run() {
     while (is_running.load()) {
-        sem_wait(m_sem);
+        sem_wait(&m_sem);
         pthread_mutex_lock(&m_mtx);
         if (m_task_queue.empty()) {
             pthread_mutex_unlock(&m_mtx);
@@ -131,16 +132,14 @@ void threadpool<T>::run() {
         } 
 
         // 执行任务
-        busy_thread_num.fetch_add(1);
         request->process();
-        busy_thread_num.fetch_sub(1);
-
+        busy_task_num--;
     }
 }
 
 template<typename T> 
-bool threadpool<T>::is_completed() {
-    return busy_thread_num.load() == 0;
+bool threadpool<T>::is_busy() {
+    return busy_task_num.load() > 0;
 }
 
 #endif
