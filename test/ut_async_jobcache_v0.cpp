@@ -34,7 +34,7 @@ TEST(TestJobcache, test_jobcache) {
 
     data = 202;
     jobcache_insert(cache, &data, sizeof(data));
-    usleep(1000);
+    usleep(2000);
 
     // 多线程插入
     thread *ths[10];
@@ -46,7 +46,7 @@ TEST(TestJobcache, test_jobcache) {
         ths[i]->join();
     }
 
-    usleep(2000);
+    usleep(5000);
     jobcache_exit(cache);
 
     // 校验处理了的结果

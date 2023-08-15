@@ -19,4 +19,19 @@ elseif(UNIX)
                                 "-Wl,--no-whole-archive")
 else()
     target_link_libraries(ut    "/WHOLEARCHIVE:" demolib)
-endif()               
+endif()    
+
+add_test(
+	NAME Testrwlock.performance 
+	COMMAND ${PROJECT_BINARY_DIR}/bin/ut --gtest_filter="Testrwlock.performance"
+)
+
+add_test(
+	NAME TestSkiplist.function 
+	COMMAND ${PROJECT_BINARY_DIR}/bin/ut --gtest_filter="TestSkiplist.function"
+)
+
+add_test(
+	NAME TestSkiplist.performance 
+	COMMAND ${PROJECT_BINARY_DIR}/bin/ut --gtest_filter="TestSkiplist.function"
+)
